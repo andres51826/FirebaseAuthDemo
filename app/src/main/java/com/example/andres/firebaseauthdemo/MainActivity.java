@@ -13,10 +13,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.andres.firebaseauthdemo.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -79,6 +82,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference nodoFirebase = database.getReference("usuarios");
+
+                            Usuario usuario= new Usuario();
+
+                            usuario.setNombre("sin nombre");
+                            usuario.setTelefono("no tiene");
+                            usuario.setCedula("no tiene");
+                            usuario.setUid(firebaseAuth.getCurrentUser().getUid());
+                            usuario.setEmail(firebaseAuth.getCurrentUser().getEmail());
+
+                            nodoFirebase.push().setValue(usuario);
                                 finish();
                                 startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
                             Toast.makeText(MainActivity.this, "registrado exitosamente", Toast.LENGTH_SHORT).show();
