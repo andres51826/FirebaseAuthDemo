@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_profile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.andres.firebaseauthdemo.ProfileActivity">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+<TextView
+    android:layout_margin="10dp"
+    android:textColor="@color/colorPrimaryDark"
+    android:textSize="30dp"
+    android:textAlignment="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/textViewUserEmail"
+    android:layout_gravity="center_horizontal"/>
+
+    <EditText
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditTextName"
+        android:hint="Nombre Completo"
+        android:textSize="20dp"
+       />
+
+    <EditText
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditTextTelefono"
+        android:hint="Telefono Movil"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EditTextcedula"
+        android:hint="cedula"
+        android:textSize="20dp"/>
+    <Button
+        android:textSize="20dp"
+        android:textColor="@color/colorBotones"
+        android:text="Guardar informacion"
+        android:layout_margin="10dp"
+        android:layout_width="188dp"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/buttonSave"
+        android:elevation="2dp"
+        android:background="@color/colorPrimary"
+        android:layout_weight="0.12" />
+
+    <Button
+        android:textSize="20dp"
+        android:textColor="@color/colorBotones"
+        android:text="Cerrar Sesión"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/buttonCerrarSesion"
+        android:elevation="2dp"
+        android:background="@color/colorPrimary"/>
+
+    <Button
+        android:textSize="20dp"
+        android:textColor="@color/colorBotones"
+        android:text="Ubicacion de las canchas"
+        android:layout_width="188dp"
+        android:layout_height="68dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/btncanchas"
+        android:elevation="2dp"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="10dp" />
+
+
+</LinearLayout>
+
+</ScrollView>
