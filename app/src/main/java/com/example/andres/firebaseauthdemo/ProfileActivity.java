@@ -28,9 +28,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private EditText editTextName, editTextTelefono, editTextcedula;
     private Button buttonSave;
     private Button buttonCanchas;
+    private Usuario usuario ;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference;
+    DatabaseReference databaseReferenceUsuario;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         textViewUserEmail = (TextView) findViewById(R.id.textViewUserEmail);
-        textViewUserEmail.setText("Bienvenido" + user.getEmail());
+        textViewUserEmail.setText("Bienvenido " + user.getEmail());
 
 
         buttonCerrarSesion = (Button) findViewById(R.id.buttonCerrarSesion);
@@ -66,10 +69,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         buttonCerrarSesion.setOnClickListener(this);
         buttonSave.setOnClickListener(this);
         buttonCanchas.setOnClickListener(this);
+        getUsuario();
     }
 
 
-    private void saveUserInformation() {
+
+
+    public Usuario getUsuario(){
+
 
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -82,19 +89,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     if (registro.child("email").getValue(String.class).equals(firebaseAuth.getCurrentUser().getEmail())) {
 
 
-                        Usuario usuario = new Usuario();
+
 
                         usuario = registro.getValue(Usuario.class);
-
                         System.out.println(usuario.getUid());
-                        usuario.setNombre(editTextName.getText().toString().trim());
-                        usuario.setCedula(editTextcedula.getText().toString().trim());
-                        usuario.setTelefono(editTextTelefono.getText().toString().trim());
-                        System.out.println(registro.getRef().toString());
 
-                        DatabaseReference actualizarReferencia = registro.getRef();
-                        actualizarReferencia.setValue(usuario);
+                        editTextName.setText(usuario.getNombre());
+                        editTextcedula.setText(usuario.getCedula());
+                        editTextTelefono.setText(usuario.getTelefono());
 
+
+
+
+                        databaseReferenceUsuario=registro.getRef();
                         break;
 
 
@@ -112,6 +119,20 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+
+        return usuario;
+
+
+    }
+
+    private void saveUserInformation() {
+
+
+
+        usuario.setNombre(editTextName.getText().toString().trim());
+        usuario.setCedula(editTextcedula.getText().toString().trim());
+        usuario.setTelefono(editTextTelefono.getText().toString().trim());
+        databaseReferenceUsuario.setValue(getUsuario());
 
         //  databaseReference.child(user.getUid()).setValue(userInformation);
 
